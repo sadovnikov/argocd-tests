@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-info-b
+data:
+  cluster-name: k8slab
+  services-endpoint: k8slab.internal.epo.org

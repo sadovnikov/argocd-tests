@@ -1,0 +1,27 @@
+{{ $root := .Values }}
+{{- range $instance := .Values.instances }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: instance-{{ $instance }}
+  namespace: argocd
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: {{ $instance }}
+    repoURL: https://github.com/sadovnikov/argocd-tests.git
+    targetRevision: master
+
+{{- if $.Values.automatedSync }}
+  syncPolicy:
+    automated:
+      prune: true
+{{- else }}
+  syncPolicy: {}
+{{- end }}
+---
+{{- end }}
+

@@ -1,0 +1,4 @@
+automatedSync: true
+instances:
+  - "app-a"
+  - "app-b"
